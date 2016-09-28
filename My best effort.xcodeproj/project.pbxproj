@@ -7,23 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		880A11D51D8F8F4B00D644A2 /* MBEDBInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880A11D41D8F8F4B00D644A2 /* MBEDBInspector.swift */; };
 		88296D661D7925E700CE8041 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88296D651D7925E700CE8041 /* AppDelegate.swift */; };
-		88296D681D7925E700CE8041 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88296D671D7925E700CE8041 /* ViewController.swift */; };
+		88296D681D7925E700CE8041 /* MBEViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88296D671D7925E700CE8041 /* MBEViewController.swift */; };
 		88296D6B1D7925E700CE8041 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88296D691D7925E700CE8041 /* Main.storyboard */; };
 		88296D6E1D7925E700CE8041 /* My_best_effort.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 88296D6C1D7925E700CE8041 /* My_best_effort.xcdatamodeld */; };
 		88296D701D7925E700CE8041 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88296D6F1D7925E700CE8041 /* Assets.xcassets */; };
 		88296D731D7925E700CE8041 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88296D711D7925E700CE8041 /* LaunchScreen.storyboard */; };
+		8840CE781D93875400922DDC /* Efforts+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8840CE741D93875400922DDC /* Efforts+CoreDataProperties.swift */; };
+		8840CE791D93875400922DDC /* Efforts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8840CE751D93875400922DDC /* Efforts.swift */; };
+		8840CE7A1D93875400922DDC /* Activities+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8840CE761D93875400922DDC /* Activities+CoreDataProperties.swift */; };
+		8840CE7B1D93875400922DDC /* Activities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8840CE771D93875400922DDC /* Activities.swift */; };
+		8844E36D1D906D8F00B60587 /* MBEStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8844E36C1D906D8F00B60587 /* MBEStartViewController.swift */; };
+		8851B33C1D82732A0069A886 /* FRDStravaClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8851B33B1D82732A0069A886 /* FRDStravaClient.framework */; };
+		88F843E61D9A25A40054E7AF /* NoteEffort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F843E51D9A25A40054E7AF /* NoteEffort.swift */; };
+		B9B37A4E5670479E4085288B /* Pods_My_best_effort.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CDA52ECEC43DDE356A29A9A /* Pods_My_best_effort.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3CDA52ECEC43DDE356A29A9A /* Pods_My_best_effort.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_My_best_effort.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FC56D1221E63D433AF531AF /* Pods-My best effort.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-My best effort.release.xcconfig"; path = "Pods/Target Support Files/Pods-My best effort/Pods-My best effort.release.xcconfig"; sourceTree = "<group>"; };
+		880A11D41D8F8F4B00D644A2 /* MBEDBInspector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBEDBInspector.swift; sourceTree = "<group>"; };
 		88296D621D7925E700CE8041 /* My best effort.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My best effort.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88296D651D7925E700CE8041 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		88296D671D7925E700CE8041 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		88296D671D7925E700CE8041 /* MBEViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBEViewController.swift; sourceTree = "<group>"; };
 		88296D6A1D7925E700CE8041 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		88296D6D1D7925E700CE8041 /* My_best_effort.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = My_best_effort.xcdatamodel; sourceTree = "<group>"; };
 		88296D6F1D7925E700CE8041 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88296D721D7925E700CE8041 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88296D741D7925E700CE8041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		883B10D81D81F46700F65BE2 /* My best effort-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "My best effort-Bridging-Header.h"; sourceTree = "<group>"; };
+		8840CE741D93875400922DDC /* Efforts+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Efforts+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8840CE751D93875400922DDC /* Efforts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Efforts.swift; sourceTree = "<group>"; };
+		8840CE761D93875400922DDC /* Activities+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Activities+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8840CE771D93875400922DDC /* Activities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activities.swift; sourceTree = "<group>"; };
+		8844E36C1D906D8F00B60587 /* MBEStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBEStartViewController.swift; sourceTree = "<group>"; };
+		8851B33B1D82732A0069A886 /* FRDStravaClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FRDStravaClient.framework; path = "../../Library/Developer/Xcode/DerivedData/My_best_effort-chvyvqkisogwgwcxixkgfnmfmaof/Build/Products/Debug-iphonesimulator/FRDStravaClient.framework"; sourceTree = "<group>"; };
+		88F843E51D9A25A40054E7AF /* NoteEffort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteEffort.swift; sourceTree = "<group>"; };
+		F695E0443840F294FA2CA1E2 /* Pods-My best effort.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-My best effort.debug.xcconfig"; path = "Pods/Target Support Files/Pods-My best effort/Pods-My best effort.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +52,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8851B33C1D82732A0069A886 /* FRDStravaClient.framework in Frameworks */,
+				B9B37A4E5670479E4085288B /* Pods_My_best_effort.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E2204089B6B047B1E2EBF9E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F695E0443840F294FA2CA1E2 /* Pods-My best effort.debug.xcconfig */,
+				7FC56D1221E63D433AF531AF /* Pods-My best effort.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		88296D591D7925E700CE8041 = {
 			isa = PBXGroup;
 			children = (
 				88296D641D7925E700CE8041 /* My best effort */,
 				88296D631D7925E700CE8041 /* Products */,
+				5E2204089B6B047B1E2EBF9E /* Pods */,
+				F1F26988C1750CECBAF91D12 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,8 +90,9 @@
 		88296D641D7925E700CE8041 /* My best effort */ = {
 			isa = PBXGroup;
 			children = (
-				88296D651D7925E700CE8041 /* AppDelegate.swift */,
-				88296D671D7925E700CE8041 /* ViewController.swift */,
+				883B10D61D81F3D300F65BE2 /* View */,
+				883B10D51D81F3C400F65BE2 /* Controller */,
+				883B10D41D81F3B200F65BE2 /* Model */,
 				88296D691D7925E700CE8041 /* Main.storyboard */,
 				88296D6F1D7925E700CE8041 /* Assets.xcassets */,
 				88296D711D7925E700CE8041 /* LaunchScreen.storyboard */,
@@ -67,6 +102,46 @@
 			path = "My best effort";
 			sourceTree = "<group>";
 		};
+		883B10D41D81F3B200F65BE2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				88296D651D7925E700CE8041 /* AppDelegate.swift */,
+				880A11D41D8F8F4B00D644A2 /* MBEDBInspector.swift */,
+				883B10D81D81F46700F65BE2 /* My best effort-Bridging-Header.h */,
+				8840CE741D93875400922DDC /* Efforts+CoreDataProperties.swift */,
+				8840CE751D93875400922DDC /* Efforts.swift */,
+				8840CE761D93875400922DDC /* Activities+CoreDataProperties.swift */,
+				8840CE771D93875400922DDC /* Activities.swift */,
+				88F843E51D9A25A40054E7AF /* NoteEffort.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		883B10D51D81F3C400F65BE2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				88296D671D7925E700CE8041 /* MBEViewController.swift */,
+				8844E36C1D906D8F00B60587 /* MBEStartViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		883B10D61D81F3D300F65BE2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		F1F26988C1750CECBAF91D12 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8851B33B1D82732A0069A886 /* FRDStravaClient.framework */,
+				3CDA52ECEC43DDE356A29A9A /* Pods_My_best_effort.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +149,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88296D771D7925E700CE8041 /* Build configuration list for PBXNativeTarget "My best effort" */;
 			buildPhases = (
+				F17C2C272DE103954CB3E446 /* Check Pods Manifest.lock */,
 				88296D5E1D7925E700CE8041 /* Sources */,
 				88296D5F1D7925E700CE8041 /* Frameworks */,
 				88296D601D7925E700CE8041 /* Resources */,
+				F04CFC4D8E20682C1EA60B5E /* Embed Pods Frameworks */,
+				7C73B70B7D3BE144C26DD2A0 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -133,13 +211,68 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7C73B70B7D3BE144C26DD2A0 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-My best effort/Pods-My best effort-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F04CFC4D8E20682C1EA60B5E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-My best effort/Pods-My best effort-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F17C2C272DE103954CB3E446 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		88296D5E1D7925E700CE8041 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88296D681D7925E700CE8041 /* ViewController.swift in Sources */,
+				880A11D51D8F8F4B00D644A2 /* MBEDBInspector.swift in Sources */,
+				88296D681D7925E700CE8041 /* MBEViewController.swift in Sources */,
+				8840CE781D93875400922DDC /* Efforts+CoreDataProperties.swift in Sources */,
+				88F843E61D9A25A40054E7AF /* NoteEffort.swift in Sources */,
+				8844E36D1D906D8F00B60587 /* MBEStartViewController.swift in Sources */,
+				8840CE791D93875400922DDC /* Efforts.swift in Sources */,
+				8840CE7B1D93875400922DDC /* Activities.swift in Sources */,
 				88296D661D7925E700CE8041 /* AppDelegate.swift in Sources */,
+				8840CE7A1D93875400922DDC /* Activities+CoreDataProperties.swift in Sources */,
 				88296D6E1D7925E700CE8041 /* My_best_effort.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,23 +384,32 @@
 		};
 		88296D781D7925E700CE8041 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F695E0443840F294FA2CA1E2 /* Pods-My best effort.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "My best effort/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.orlov.vasili.My-best-effort";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "My best effort/My best effort-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		88296D791D7925E700CE8041 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7FC56D1221E63D433AF531AF /* Pods-My best effort.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "My best effort/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.orlov.vasili.My-best-effort";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "My best effort/My best effort-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -290,6 +432,7 @@
 				88296D791D7925E700CE8041 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

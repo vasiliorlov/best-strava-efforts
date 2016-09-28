@@ -1,25 +1,115 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dt2-y6-kvv">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="b1b-nu-2xy">
+            <objects>
+                <navigationController id="dt2-y6-kvv" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hoB-qa-B50">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="zRd-im-ljI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8J3-8X-mqJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-559" y="478"/>
+        </scene>
+        <!--Start View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MBEStartViewController" id="BYZ-38-t0r" customClass="MBEStartViewController" customModule="My_best_effort" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mw4-jq-xr9">
+                                <rect key="frame" x="121" y="352" width="172" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="172" id="VKB-49-8jg"/>
+                                    <constraint firstAttribute="height" constant="31" id="dRz-Xv-oEe"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="connectStrava"/>
+                                <connections>
+                                    <action selector="openStravaLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gb1-Gd-hiP"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mw4-jq-xr9" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="aaU-RW-ANG"/>
+                            <constraint firstItem="mw4-jq-xr9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hvT-uu-WGj"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="cck-6t-vqp"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-97" y="478"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="l3D-AS-QT4">
+            <objects>
+                <viewController storyboardIdentifier="MBEViewController" id="8mw-vn-fNz" customClass="MBEViewController" customModule="My_best_effort" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="991-dw-xEq"/>
+                        <viewControllerLayoutGuide type="bottom" id="JOI-Ci-Q9b"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nh2-E0-siS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tja-og-ZXn">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EffortsCell" id="FFZ-i9-Wmt">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FFZ-i9-Wmt" id="lne-Jg-hRd">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="8mw-vn-fNz" id="rmR-bY-fA5"/>
+                                    <outlet property="delegate" destination="8mw-vn-fNz" id="rpr-OO-mR9"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Tja-og-ZXn" secondAttribute="trailing" constant="-20" id="9Ez-Xq-F3W"/>
+                            <constraint firstItem="Tja-og-ZXn" firstAttribute="leading" secondItem="nh2-E0-siS" secondAttribute="leadingMargin" constant="-20" id="B9k-S9-pNq"/>
+                            <constraint firstItem="Tja-og-ZXn" firstAttribute="top" secondItem="nh2-E0-siS" secondAttribute="topMargin" id="iLm-0a-8kr"/>
+                            <constraint firstItem="JOI-Ci-Q9b" firstAttribute="top" secondItem="Tja-og-ZXn" secondAttribute="bottom" id="zkI-JR-yY1"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="tableView" destination="Tja-og-ZXn" id="ax1-yZ-G8c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dQ6-cE-Q4O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="363" y="487"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="connectStrava" width="172" height="31"/>
+    </resources>
 </document>
