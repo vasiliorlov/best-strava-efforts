@@ -11,15 +11,13 @@ import UIKit
 class NoteEffort {
     var date:String
     var name:String
-    var typeDistString:String
-    var time:Int
+    var time:String
     var url:String
     
     init(){
         self.date = ""
         self.name = ""
-        self.typeDistString = ""
-        self.time = 0
+        self.time = ""
         self.url = ""
     }
     

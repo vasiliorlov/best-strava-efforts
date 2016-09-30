@@ -12,9 +12,11 @@ class MBEStartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         print("start",NSUserDefaults.standardUserDefaults().objectForKey("token"))
         if let token = NSUserDefaults.standardUserDefaults().objectForKey("token") {
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("MBEViewController") as! MBEViewController
             vc.token = token as? String
+            print("Enter")
             self.navigationController?.pushViewController(vc, animated: true)
         }
         

@@ -63,12 +63,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let URLaloma = NSURL(string:"https://www.strava.com/oauth/token")
             Alamofire.request(.POST, URLaloma! , parameters:params).responseJSON {
                 response in
-               
+                print(response)
                 switch response.result {
                 case .Success:
                     if let value = response.result.value {
                         let json = JSON(value)
-                     
+                        
                         NSUserDefaults.standardUserDefaults().setObject(json["access_token"].string!, forKey: "token")
                         let athlete = json["athlete"]
                         NSUserDefaults.standardUserDefaults().setInteger(athlete["id"].int!, forKey: "idUser")
@@ -83,6 +83,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
             
         }
+        
+        print("app",NSUserDefaults.standardUserDefaults().objectForKey("token"))
         
                 NSUserDefaults.standardUserDefaults().synchronize()
 

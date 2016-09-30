@@ -115,8 +115,8 @@ class MBEDBInspector: UIViewController {
             print ("error")
         }
         
-      
-
+        
+        
         
         
         do{
@@ -172,38 +172,38 @@ class MBEDBInspector: UIViewController {
                                 //  print(streamTime)
                             }
                             
-                           
+                            
                             for typDist in 0 ... 13 {
-                            var minTime:Int = 0
-                            let  distLenth:Double = Double(self.getMetr(typDist))
-                            guard distLenth <= dist else {break}
-                            for index in 0 ... count-2 {
-                                
-                                for index2 in index ... count-2 {
+                                var minTime:Int = 0
+                                let  distLenth:Double = Double(self.getMetr(typDist))
+                                guard distLenth <= dist else {break}
+                                for index in 0 ... count-2 {
                                     
-
-                                    let  distArray =   streamDist[index2 + 1] - streamDist[index]
-                                    let  distArrayPre = streamDist[index2] - streamDist[index]
-                                    let  timeArray = streamTime[index2+1] - streamTime[index]
-                                    let  timeArrayPre = streamTime[index2] - streamTime[index]
-
-                                    if distArrayPre < distLenth && distArray >= distLenth {
-                                        if minTime == 0 || timeArray < minTime{
-                                            if distArray - distLenth > distLenth - distArrayPre{
-                                                minTime = timeArray
-                                            } else {
-                                                minTime = timeArrayPre
+                                    for index2 in index ... count-2 {
+                                        
+                                        
+                                        let  distArray =   streamDist[index2 + 1] - streamDist[index]
+                                        let  distArrayPre = streamDist[index2] - streamDist[index]
+                                        let  timeArray = streamTime[index2+1] - streamTime[index]
+                                        let  timeArrayPre = streamTime[index2] - streamTime[index]
+                                        
+                                        if distArrayPre < distLenth && distArray >= distLenth {
+                                            if minTime == 0 || timeArray < minTime{
+                                                if distArray - distLenth > distLenth - distArrayPre{
+                                                    minTime = timeArray
+                                                } else {
+                                                    minTime = timeArrayPre
+                                                }
                                             }
+                                            
+                                            break
                                         }
                                         
-                                        break
                                     }
                                     
                                 }
                                 
-                            }
-                            
-                            
+                                
                                 
                                 let newEfforts = NSEntityDescription.insertNewObjectForEntityForName("Efforts", inManagedObjectContext: self.managedObjectContext) as! Efforts
                                 newEfforts.typeEfforts = self.getMetr(typDist)
@@ -215,20 +215,22 @@ class MBEDBInspector: UIViewController {
                                     
                                 }
                                 
-                            print(entity.id!," ",distLenth," ",minTime," ",self.getTimeString(minTime))
+                                print(entity.id!," ",distLenth," ",minTime," ",self.getTimeString(minTime))
+                            }
+                            
+                            self.reloadDataDelegate?.reloadData(3, json: nil)
+                            
+                            
                         }
-                        
-                      }
                     case .Failure(let error):
                         print(error)
                     }
                 }
                 
-                
-                
+                self.reloadDataDelegate?.reloadData(4, json: nil)
             }
             
-    
+            
             
             
             
@@ -237,7 +239,7 @@ class MBEDBInspector: UIViewController {
         }
         
         
-     
+        
         
     }
     
@@ -261,6 +263,26 @@ class MBEDBInspector: UIViewController {
         }
         
     }
+    func getMetrStr(index:Int)->String{
+        switch index {
+        case 0: return "400 m"
+        case 1: return "0.5 mi"
+        case 2: return "1 km"
+        case 3: return "1 mi"
+        case 4: return "2 mi"
+        case 5: return "5 km"
+        case 6: return "10 km"
+        case 7: return "15 km"
+        case 8: return "10 mi"
+        case 9: return "20 km"
+        case 10: return "Half Marathon"
+        case 11: return "30 km"
+        case 12: return "Marathon"
+        case 13: return "50 km"
+        default: return ""
+        }
+        
+    }
     
     func getTimeString(sec:Int)->String{
         var secCount = sec
@@ -272,28 +294,33 @@ class MBEDBInspector: UIViewController {
         return String(h) + " h " + String(m) + " m " + String(secCount) + "s"
     }
     
-    func getEfforts(typeDist:Int){
+    func getEfforts(typeDist:Int) ->[NoteEffort]{
         let predicate = NSPredicate(format: "typeEfforts = %i",typeDist)// NSUserDefaults.standardUserDefaults().integerForKey("idUser"))
         let sortDescr = NSSortDescriptor(key: "time", ascending: true)
         let fetchRequest = NSFetchRequest(entityName: "Efforts")
         
         
-
+        var result = [NoteEffort]()
         
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = [sortDescr]
-  
+        
         do{
             let fetchEntity = try self.managedObjectContext.executeFetchRequest(fetchRequest) as! [Efforts]
             for entity in fetchEntity {
-                print(entity.time," ",getTimeString((entity.time?.integerValue)!)," ", entity.activities," ",entity.typeEfforts," ",typeDist)
+                let resultNote = NoteEffort()
+                resultNote.date = ""
+                resultNote.name = ""
+                resultNote.time = getTimeString((entity.time?.integerValue)!)
+                resultNote.url = ""
                 
+                result.append(resultNote)
             }
         }
         catch{
             print ("error")
         }
-        
+        return result
     }
     
     /*

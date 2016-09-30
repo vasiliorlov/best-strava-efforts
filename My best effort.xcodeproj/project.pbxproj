@@ -19,6 +19,11 @@
 		8840CE7A1D93875400922DDC /* Activities+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8840CE761D93875400922DDC /* Activities+CoreDataProperties.swift */; };
 		8840CE7B1D93875400922DDC /* Activities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8840CE771D93875400922DDC /* Activities.swift */; };
 		8844E36D1D906D8F00B60587 /* MBEStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8844E36C1D906D8F00B60587 /* MBEStartViewController.swift */; };
+		8850A6A01D9D6FD900C15C3A /* animal1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8850A69C1D9D6FD900C15C3A /* animal1.png */; };
+		8850A6A11D9D6FD900C15C3A /* animal2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8850A69D1D9D6FD900C15C3A /* animal2.png */; };
+		8850A6A21D9D6FD900C15C3A /* animal3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8850A69E1D9D6FD900C15C3A /* animal3.png */; };
+		8850A6A31D9D6FD900C15C3A /* animal4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8850A69F1D9D6FD900C15C3A /* animal4.png */; };
+		8850A6A51D9D8E8C00C15C3A /* MBETableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850A6A41D9D8E8C00C15C3A /* MBETableViewCell.swift */; };
 		8851B33C1D82732A0069A886 /* FRDStravaClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8851B33B1D82732A0069A886 /* FRDStravaClient.framework */; };
 		88F843E61D9A25A40054E7AF /* NoteEffort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F843E51D9A25A40054E7AF /* NoteEffort.swift */; };
 		B9B37A4E5670479E4085288B /* Pods_My_best_effort.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CDA52ECEC43DDE356A29A9A /* Pods_My_best_effort.framework */; };
@@ -42,6 +47,11 @@
 		8840CE761D93875400922DDC /* Activities+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Activities+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8840CE771D93875400922DDC /* Activities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activities.swift; sourceTree = "<group>"; };
 		8844E36C1D906D8F00B60587 /* MBEStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBEStartViewController.swift; sourceTree = "<group>"; };
+		8850A69C1D9D6FD900C15C3A /* animal1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = animal1.png; path = "../../../Yandex.Disk.localized/Документы/icon animal/animal1.png"; sourceTree = "<group>"; };
+		8850A69D1D9D6FD900C15C3A /* animal2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = animal2.png; path = "../../../Yandex.Disk.localized/Документы/icon animal/animal2.png"; sourceTree = "<group>"; };
+		8850A69E1D9D6FD900C15C3A /* animal3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = animal3.png; path = "../../../Yandex.Disk.localized/Документы/icon animal/animal3.png"; sourceTree = "<group>"; };
+		8850A69F1D9D6FD900C15C3A /* animal4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = animal4.png; path = "../../../Yandex.Disk.localized/Документы/icon animal/animal4.png"; sourceTree = "<group>"; };
+		8850A6A41D9D8E8C00C15C3A /* MBETableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBETableViewCell.swift; sourceTree = "<group>"; };
 		8851B33B1D82732A0069A886 /* FRDStravaClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FRDStravaClient.framework; path = "../../Library/Developer/Xcode/DerivedData/My_best_effort-chvyvqkisogwgwcxixkgfnmfmaof/Build/Products/Debug-iphonesimulator/FRDStravaClient.framework"; sourceTree = "<group>"; };
 		88F843E51D9A25A40054E7AF /* NoteEffort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteEffort.swift; sourceTree = "<group>"; };
 		F695E0443840F294FA2CA1E2 /* Pods-My best effort.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-My best effort.debug.xcconfig"; path = "Pods/Target Support Files/Pods-My best effort/Pods-My best effort.debug.xcconfig"; sourceTree = "<group>"; };
@@ -90,6 +100,7 @@
 		88296D641D7925E700CE8041 /* My best effort */ = {
 			isa = PBXGroup;
 			children = (
+				8850A69B1D9D6F9500C15C3A /* Image */,
 				883B10D61D81F3D300F65BE2 /* View */,
 				883B10D51D81F3C400F65BE2 /* Controller */,
 				883B10D41D81F3B200F65BE2 /* Model */,
@@ -129,8 +140,20 @@
 		883B10D61D81F3D300F65BE2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8850A6A41D9D8E8C00C15C3A /* MBETableViewCell.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		8850A69B1D9D6F9500C15C3A /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				8850A69C1D9D6FD900C15C3A /* animal1.png */,
+				8850A69D1D9D6FD900C15C3A /* animal2.png */,
+				8850A69E1D9D6FD900C15C3A /* animal3.png */,
+				8850A69F1D9D6FD900C15C3A /* animal4.png */,
+			);
+			name = Image;
 			sourceTree = "<group>";
 		};
 		F1F26988C1750CECBAF91D12 /* Frameworks */ = {
@@ -203,9 +226,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8850A6A11D9D6FD900C15C3A /* animal2.png in Resources */,
 				88296D731D7925E700CE8041 /* LaunchScreen.storyboard in Resources */,
+				8850A6A31D9D6FD900C15C3A /* animal4.png in Resources */,
+				8850A6A01D9D6FD900C15C3A /* animal1.png in Resources */,
 				88296D701D7925E700CE8041 /* Assets.xcassets in Resources */,
 				88296D6B1D7925E700CE8041 /* Main.storyboard in Resources */,
+				8850A6A21D9D6FD900C15C3A /* animal3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +299,7 @@
 				8840CE791D93875400922DDC /* Efforts.swift in Sources */,
 				8840CE7B1D93875400922DDC /* Activities.swift in Sources */,
 				88296D661D7925E700CE8041 /* AppDelegate.swift in Sources */,
+				8850A6A51D9D8E8C00C15C3A /* MBETableViewCell.swift in Sources */,
 				8840CE7A1D93875400922DDC /* Activities+CoreDataProperties.swift in Sources */,
 				88296D6E1D7925E700CE8041 /* My_best_effort.xcdatamodeld in Sources */,
 			);
@@ -389,7 +417,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "My best effort/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.orlov.vasili.My-best-effort";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -405,7 +433,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "My best effort/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.orlov.vasili.My-best-effort";
 				PRODUCT_NAME = "$(TARGET_NAME)";
