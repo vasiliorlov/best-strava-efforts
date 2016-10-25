@@ -2,7 +2,7 @@
 //  Activities+CoreDataProperties.swift
 //  My best effort
 //
-//  Created by iMac on 22.09.16.
+//  Created by iMac on 30.09.16.
 //  Copyright © 2016 vasayCo. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,10 +14,10 @@ import CoreData
 
 extension Activities {
 
+    @NSManaged var date: String?
     @NSManaged var id: NSNumber?
     @NSManaged var idUser: NSNumber?
     @NSManaged var name: String?
-    @NSManaged var date: NSDate?
     @NSManaged var efforts: NSSet?
 
 }

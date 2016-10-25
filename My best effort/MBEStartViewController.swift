@@ -12,7 +12,13 @@ class MBEStartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        
          print("start",NSUserDefaults.standardUserDefaults().objectForKey("token"))
+       NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MBEStartViewController.goNextController(_:)), name:"MBEStravaNotificationIdentifier", object: nil)
+        
         if let token = NSUserDefaults.standardUserDefaults().objectForKey("token") {
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("MBEViewController") as! MBEViewController
             vc.token = token as? String
@@ -23,6 +29,16 @@ class MBEStartViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    func goNextController(notification: NSNotification){
+        if let token = NSUserDefaults.standardUserDefaults().objectForKey("token") {
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("MBEViewController") as! MBEViewController
+            vc.token = token as? String
+            print("Enter")
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -36,7 +52,7 @@ class MBEStartViewController: UIViewController {
         NSUserDefaults.standardUserDefaults().setObject("localhost", forKey: "CallbackDomain")
         NSUserDefaults.standardUserDefaults().synchronize()
         
-        let strUrl = "FRDStravaClient://" +  (NSUserDefaults.standardUserDefaults().objectForKey("CallbackDomain") as! String)
+        let strUrl = "MBEStravaClient://" +  (NSUserDefaults.standardUserDefaults().objectForKey("CallbackDomain") as! String)
         
         let urlStr = "https://www.strava.com/oauth/authorize?client_id="
             + (NSUserDefaults.standardUserDefaults().objectForKey("ClientID") as! String)

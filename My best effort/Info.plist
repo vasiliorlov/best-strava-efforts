@@ -24,10 +24,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.orlov.vasili.FRDStravaClient</string>
+			<string>com.orlov.vasili.MBEStravaClient</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>FRDStravaClient</string>
+				<string>MBEStravaClient</string>
 			</array>
 		</dict>
 	</array>

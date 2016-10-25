@@ -51,103 +51,34 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
     var token:String?
     var result = [NoteEffort]()
     
+    var countAllActivities = (0,0)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //view gradient
+        gradView()
         //hide baritem
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
-        fabRight.buttonImage = UIImage(named: "animal3")
-        
-        
-        /*
-         case Pop
-         case Fade
-         case SlideLeft
-         case SlideUp
-         case None
-         */
-        
-        result = MBEDBInspector.sharedInstance.getEfforts(typeDist.m400)
-        labelDist.text =  MBEDBInspector.sharedInstance.getMetrStr(0)
+        fabRight.buttonImage = UIImage(named: "map2")
+
+        result = MBEDBInspector.sharedInstance.getEfforts(typeDist.km1)
+        labelDist.text =  MBEDBInspector.sharedInstance.getMetrStr(2)
         
         self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
+
         
+   
+        addFab(typeDist: 2, nameImage: "point3")
+        addFab(typeDist: 3, nameImage: "point3")
+        addFab(typeDist: 4, nameImage: "point3")
+        addFab(typeDist: 5, nameImage: "point3")
+        addFab(typeDist: 6, nameImage: "point3")
+        addFab(typeDist: 8, nameImage: "point3")
+        addFab(typeDist: 10, nameImage: "point3")
+        addFab(typeDist: 12, nameImage: "point3")
         
-        
-        
-        
-        /*
-         if let json = MBEDBInspector.sharedInstance.requestWeb("https://www.strava.com/api/v3/activities/694601290/streams/time", header: headers, params: nil){
-         for (index,subJson):(String, JSON) in json {
-         print(index,"-----")
-         print(subJson["data"])
-         // print(subJson["id"]," ", subJson["distance"]," ",subJson["elapsed_time"]," ",subJson["start_date"].string ," ", subJson["name"].string )
-         
-         }
-         
-         }
-         
-         
-         */
-        
-        
-        
-        fabRight.addItem(MBEDBInspector.sharedInstance.getMetrStr(1), icon: UIImage(named: "animal1")!, handler: { item in
-            self.result = MBEDBInspector.sharedInstance.getEfforts(MBEDBInspector.sharedInstance.getMetr(1))
-            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
-            self.labelDist.text =  MBEDBInspector.sharedInstance.getMetrStr(1)
-            self.fabRight.close()
-        })
-        fabRight.addItem(MBEDBInspector.sharedInstance.getMetrStr(2), icon: UIImage(named: "animal1")!, handler: { item in
-            self.result = MBEDBInspector.sharedInstance.getEfforts(MBEDBInspector.sharedInstance.getMetr(2))
-            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
-            self.labelDist.text =  MBEDBInspector.sharedInstance.getMetrStr(2)
-            self.fabRight.close()
-        })
-        fabRight.addItem(MBEDBInspector.sharedInstance.getMetrStr(3), icon: UIImage(named: "animal1")!, handler: { item in
-            self.result = MBEDBInspector.sharedInstance.getEfforts(MBEDBInspector.sharedInstance.getMetr(3))
-            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
-            self.labelDist.text =  MBEDBInspector.sharedInstance.getMetrStr(3)
-            self.fabRight.close()
-        })
-        fabRight.addItem(MBEDBInspector.sharedInstance.getMetrStr(4), icon: UIImage(named: "animal1")!, handler: { item in
-            self.result = MBEDBInspector.sharedInstance.getEfforts(MBEDBInspector.sharedInstance.getMetr(4))
-            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
-            self.labelDist.text =  MBEDBInspector.sharedInstance.getMetrStr(4)
-            self.fabRight.close()
-        })
-        fabRight.addItem(MBEDBInspector.sharedInstance.getMetrStr(5), icon: UIImage(named: "animal1")!, handler: { item in
-            self.result = MBEDBInspector.sharedInstance.getEfforts(MBEDBInspector.sharedInstance.getMetr(5))
-            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
-            self.labelDist.text =  MBEDBInspector.sharedInstance.getMetrStr(5)
-            self.fabRight.close()
-        })
-        fabRight.addItem(MBEDBInspector.sharedInstance.getMetrStr(6), icon: UIImage(named: "animal1")!, handler: { item in
-            self.result = MBEDBInspector.sharedInstance.getEfforts(MBEDBInspector.sharedInstance.getMetr(6))
-            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
-             self.labelDist.text =  MBEDBInspector.sharedInstance.getMetrStr(6)
-            self.fabRight.close()
-        })
-        
-        fabRight.addItem(MBEDBInspector.sharedInstance.getMetrStr(8), icon: UIImage(named: "animal1")!, handler: { item in
-            self.result = MBEDBInspector.sharedInstance.getEfforts(MBEDBInspector.sharedInstance.getMetr(8))
-            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
-            self.labelDist.text =  MBEDBInspector.sharedInstance.getMetrStr(8)
-            self.fabRight.close()
-        })
-        fabRight.addItem(MBEDBInspector.sharedInstance.getMetrStr(10), icon: UIImage(named: "animal1")!, handler: { item in
-            self.result = MBEDBInspector.sharedInstance.getEfforts(MBEDBInspector.sharedInstance.getMetr(10))
-            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
-            self.labelDist.text =  MBEDBInspector.sharedInstance.getMetrStr(10)
-            self.fabRight.close()
-        })
-        fabRight.addItem(MBEDBInspector.sharedInstance.getMetrStr(12), icon: UIImage(named: "animal1")!, handler: { item in
-            self.result = MBEDBInspector.sharedInstance.getEfforts(MBEDBInspector.sharedInstance.getMetr(12))
-            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
-            self.labelDist.text =  MBEDBInspector.sharedInstance.getMetrStr(12)
-            self.fabRight.close()
-        })
         
         self.view.addSubview(fabRight)
         
@@ -157,32 +88,51 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
         
     }
     
+    func gradView(){
+        let color1 = UIColor(red: 240/255, green: 120/255, blue: 35/255, alpha: 1).CGColor
+        let color2 = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1).CGColor
+        let gradLayer = CAGradientLayer()
+        gradLayer.frame = self.view.bounds
+        gradLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradLayer.endPoint = CGPoint(x: 1, y: 1)
+        gradLayer.colors = [color1,color2]
+        
+        self.view.layer.insertSublayer(gradLayer, atIndex: 0)
+        
+     
+        
+    }
     
-    func reloadData(step:Int, json:JSON?){
-        switch step {
-        case 0: //step 0 get activities
-            print("step 0")
-            MBEDBInspector.sharedInstance.reloadDataDelegate = self
-            let token = NSUserDefaults.standardUserDefaults().objectForKey("token")
-            let headers = ["Authorization ": "Bearer \(token as! String)"]
-            let params = ["page":1,"per_page": 200]
-            MBEDBInspector.sharedInstance.requestWeb("https://www.strava.com/api/v3/athlete/activities", header: headers, params: params)
-        case 1: //step 1 save activities to core data
-            print("step 1")
-            MBEDBInspector.sharedInstance.deleteActivities()
-            MBEDBInspector.sharedInstance.saveActivitiesToDB(json!)
-        case 2: //step 2 get and math stream
-            print("step 2")
-            MBEDBInspector.sharedInstance.getSreamFromActivities()
-        case 3: //step 2 get and math stream
-            print("step 3")
-
-        case 4: //step 2 get and math stream
-            print("step 4")
+    func addFab(typeDist typeDist:Int,nameImage:String){
+        
+        fabRight.addItem(MBEDBInspector.sharedInstance.getMetrStr(typeDist), icon: UIImage(named: nameImage)!, handler: { item in
+            self.result = MBEDBInspector.sharedInstance.getEfforts(MBEDBInspector.sharedInstance.getMetr(typeDist))
             self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
-        default:
-            print("dafault")
+            self.labelDist.text =  MBEDBInspector.sharedInstance.getMetrStr(typeDist)
+            self.fabRight.close()
+        })
+    }
+    
+    
+    func reloadData(step:(Int,Int), json:JSON?){
+        if step.0 == 0 {
+         //step 0 get activities
+            print("Load Activities")
+             countAllActivities = (0,0)
+            MBEDBInspector.sharedInstance.reloadDataDelegate = self
+            MBEDBInspector.sharedInstance.requestWeb("https://www.strava.com/api/v3/athlete/activities",page: 1)
+           
+        } else{
+            if  step.0 == 0 &&  step.1 != 0 {
+                print("Loaded \(step.1) activities")
+                countAllActivities.1 = step.1
+            } else{
+                countAllActivities.0 += 1
+              print("Match \(countAllActivities.0) / \(countAllActivities)")
+            }
         }
+       
+        
         
     }
     //MARK: - table UITableViewDataSource
@@ -201,31 +151,15 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
         return cell
     }
     
-    func  tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-        
-        
-    }
+
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath){
         
     }
-    //Rrefresh data
-    /*
-     func refresh(step:Int){
-     switch step {
-     case 0:
-     code
-     default:
-     <#code#>
-     }
-     
-     
-     }
-     
-     */
+
     
     
     @IBAction func actionRefresh(sender: AnyObject) {
-        reloadData(0, json: nil)
+        reloadData((0,0), json: nil)
     }
     
     @IBAction func actionLogOut(sender: AnyObject) {

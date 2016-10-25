@@ -19,12 +19,10 @@
 		8840CE7A1D93875400922DDC /* Activities+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8840CE761D93875400922DDC /* Activities+CoreDataProperties.swift */; };
 		8840CE7B1D93875400922DDC /* Activities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8840CE771D93875400922DDC /* Activities.swift */; };
 		8844E36D1D906D8F00B60587 /* MBEStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8844E36C1D906D8F00B60587 /* MBEStartViewController.swift */; };
-		8850A6A01D9D6FD900C15C3A /* animal1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8850A69C1D9D6FD900C15C3A /* animal1.png */; };
-		8850A6A11D9D6FD900C15C3A /* animal2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8850A69D1D9D6FD900C15C3A /* animal2.png */; };
-		8850A6A21D9D6FD900C15C3A /* animal3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8850A69E1D9D6FD900C15C3A /* animal3.png */; };
-		8850A6A31D9D6FD900C15C3A /* animal4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8850A69F1D9D6FD900C15C3A /* animal4.png */; };
 		8850A6A51D9D8E8C00C15C3A /* MBETableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850A6A41D9D8E8C00C15C3A /* MBETableViewCell.swift */; };
 		8851B33C1D82732A0069A886 /* FRDStravaClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8851B33B1D82732A0069A886 /* FRDStravaClient.framework */; };
+		88585B501DAA1FF3002227EE /* map2.png in Resources */ = {isa = PBXBuildFile; fileRef = 88585B4F1DAA1FF3002227EE /* map2.png */; };
+		88650D2A1DA2C42600B7C9C2 /* point3.png in Resources */ = {isa = PBXBuildFile; fileRef = 88650D291DA2C42600B7C9C2 /* point3.png */; };
 		88F843E61D9A25A40054E7AF /* NoteEffort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F843E51D9A25A40054E7AF /* NoteEffort.swift */; };
 		B9B37A4E5670479E4085288B /* Pods_My_best_effort.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CDA52ECEC43DDE356A29A9A /* Pods_My_best_effort.framework */; };
 /* End PBXBuildFile section */
@@ -33,6 +31,7 @@
 		3CDA52ECEC43DDE356A29A9A /* Pods_My_best_effort.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_My_best_effort.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FC56D1221E63D433AF531AF /* Pods-My best effort.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-My best effort.release.xcconfig"; path = "Pods/Target Support Files/Pods-My best effort/Pods-My best effort.release.xcconfig"; sourceTree = "<group>"; };
 		880A11D41D8F8F4B00D644A2 /* MBEDBInspector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBEDBInspector.swift; sourceTree = "<group>"; };
+		881113CD1DBD25E000F6BD80 /* My best effort-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "My best effort-Bridging-Header.h"; sourceTree = "<group>"; };
 		88296D621D7925E700CE8041 /* My best effort.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My best effort.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88296D651D7925E700CE8041 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88296D671D7925E700CE8041 /* MBEViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBEViewController.swift; sourceTree = "<group>"; };
@@ -41,18 +40,15 @@
 		88296D6F1D7925E700CE8041 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88296D721D7925E700CE8041 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88296D741D7925E700CE8041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		883B10D81D81F46700F65BE2 /* My best effort-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "My best effort-Bridging-Header.h"; sourceTree = "<group>"; };
 		8840CE741D93875400922DDC /* Efforts+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Efforts+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8840CE751D93875400922DDC /* Efforts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Efforts.swift; sourceTree = "<group>"; };
 		8840CE761D93875400922DDC /* Activities+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Activities+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8840CE771D93875400922DDC /* Activities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activities.swift; sourceTree = "<group>"; };
 		8844E36C1D906D8F00B60587 /* MBEStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBEStartViewController.swift; sourceTree = "<group>"; };
-		8850A69C1D9D6FD900C15C3A /* animal1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = animal1.png; path = "../../../Yandex.Disk.localized/Документы/icon animal/animal1.png"; sourceTree = "<group>"; };
-		8850A69D1D9D6FD900C15C3A /* animal2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = animal2.png; path = "../../../Yandex.Disk.localized/Документы/icon animal/animal2.png"; sourceTree = "<group>"; };
-		8850A69E1D9D6FD900C15C3A /* animal3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = animal3.png; path = "../../../Yandex.Disk.localized/Документы/icon animal/animal3.png"; sourceTree = "<group>"; };
-		8850A69F1D9D6FD900C15C3A /* animal4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = animal4.png; path = "../../../Yandex.Disk.localized/Документы/icon animal/animal4.png"; sourceTree = "<group>"; };
 		8850A6A41D9D8E8C00C15C3A /* MBETableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBETableViewCell.swift; sourceTree = "<group>"; };
 		8851B33B1D82732A0069A886 /* FRDStravaClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FRDStravaClient.framework; path = "../../Library/Developer/Xcode/DerivedData/My_best_effort-chvyvqkisogwgwcxixkgfnmfmaof/Build/Products/Debug-iphonesimulator/FRDStravaClient.framework"; sourceTree = "<group>"; };
+		88585B4F1DAA1FF3002227EE /* map2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = map2.png; path = "../../../Yandex.Disk.localized/Документы/pict/best-effort/map2.png"; sourceTree = "<group>"; };
+		88650D291DA2C42600B7C9C2 /* point3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = point3.png; path = "../../../Yandex.Disk.localized/Документы/pict/best-effort/point3.png"; sourceTree = "<group>"; };
 		88F843E51D9A25A40054E7AF /* NoteEffort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteEffort.swift; sourceTree = "<group>"; };
 		F695E0443840F294FA2CA1E2 /* Pods-My best effort.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-My best effort.debug.xcconfig"; path = "Pods/Target Support Files/Pods-My best effort/Pods-My best effort.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,12 +114,12 @@
 			children = (
 				88296D651D7925E700CE8041 /* AppDelegate.swift */,
 				880A11D41D8F8F4B00D644A2 /* MBEDBInspector.swift */,
-				883B10D81D81F46700F65BE2 /* My best effort-Bridging-Header.h */,
 				8840CE741D93875400922DDC /* Efforts+CoreDataProperties.swift */,
 				8840CE751D93875400922DDC /* Efforts.swift */,
 				8840CE761D93875400922DDC /* Activities+CoreDataProperties.swift */,
 				8840CE771D93875400922DDC /* Activities.swift */,
 				88F843E51D9A25A40054E7AF /* NoteEffort.swift */,
+				881113CD1DBD25E000F6BD80 /* My best effort-Bridging-Header.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -148,10 +144,8 @@
 		8850A69B1D9D6F9500C15C3A /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				8850A69C1D9D6FD900C15C3A /* animal1.png */,
-				8850A69D1D9D6FD900C15C3A /* animal2.png */,
-				8850A69E1D9D6FD900C15C3A /* animal3.png */,
-				8850A69F1D9D6FD900C15C3A /* animal4.png */,
+				88585B4F1DAA1FF3002227EE /* map2.png */,
+				88650D291DA2C42600B7C9C2 /* point3.png */,
 			);
 			name = Image;
 			sourceTree = "<group>";
@@ -226,13 +220,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8850A6A11D9D6FD900C15C3A /* animal2.png in Resources */,
+				88585B501DAA1FF3002227EE /* map2.png in Resources */,
+				88650D2A1DA2C42600B7C9C2 /* point3.png in Resources */,
 				88296D731D7925E700CE8041 /* LaunchScreen.storyboard in Resources */,
-				8850A6A31D9D6FD900C15C3A /* animal4.png in Resources */,
-				8850A6A01D9D6FD900C15C3A /* animal1.png in Resources */,
 				88296D701D7925E700CE8041 /* Assets.xcassets in Resources */,
 				88296D6B1D7925E700CE8041 /* Main.storyboard in Resources */,
-				8850A6A21D9D6FD900C15C3A /* animal3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

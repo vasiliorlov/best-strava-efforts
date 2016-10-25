@@ -12,7 +12,7 @@ import Alamofire
 import SwiftyJSON
 
 protocol reLoadDataDataSource {
-    func reloadData(step:Int, json:JSON?)
+    func reloadData(step:(Int,Int), json:JSON?)
 }
 struct typeDist{
     static let m400 = 400
@@ -51,44 +51,86 @@ class MBEDBInspector: UIViewController {
     // MARK: - Alamofire
     
     
-    func requestWeb(url:String, header:[String:String]?, params:[String:AnyObject]?) {
-        
+    func requestWeb(url:String,page:Int) {
+        let token = NSUserDefaults.standardUserDefaults().objectForKey("token")
+        let headers = ["Authorization ": "Bearer \(token as! String)"]
+        let params = ["page":page,"per_page":200]
         let URLaloma = NSURL(string:url)
-        Alamofire.request(.GET, URLaloma! ,parameters: params, headers: header).responseJSON {
+        let notTheMainQueue = dispatch_queue_create("com.vasili.orlov.besteffort", DISPATCH_QUEUE_SERIAL)
+        dispatch_async(notTheMainQueue) {
+        Alamofire.request(.GET, URLaloma! ,parameters: params, headers: headers).responseJSON {
             response in
             switch response.result {
             case .Success:
                 if let value = response.result.value {
                     let jSon = JSON(value)
-                    self.reloadDataDelegate?.reloadData(1, json: jSon)
                     
+                    print(value.count)
+                    if value.count != 0 {
+                        self.deleteActivities()
+                        self.saveActivitiesToDB(jSon)
+                        self.requestWeb(url, page: page + 1)
+                    }
                 }
             case .Failure(let error):
-                print(error)
+                print("#1#",error.code," ",error.localizedDescription)
             }
+        }
         }
     }
     
     func saveActivitiesToDB(jSon:JSON){
-        
+        var count = 0;
+        let maxId = self.getMaxIdActivities()
+        print("max ID",maxId)
         let idUser =  NSUserDefaults.standardUserDefaults().integerForKey("idUser")
         for (_,subJson):(String, JSON) in jSon {
-            print(idUser," ",subJson["id"]," ", subJson["distance"].double," ",subJson["elapsed_time"]," ",subJson["start_date"].string ," ",convertTimeStringDate(subJson["start_date"].string!)," ", subJson["name"].string )
             
+            
+            if subJson["id"].int > maxId {
+            print("Insert id",subJson["id"].int)
             let newActivities = NSEntityDescription.insertNewObjectForEntityForName("Activities", inManagedObjectContext: self.managedObjectContext) as! Activities
             newActivities.id = subJson["id"].int
             newActivities.idUser = idUser
-            newActivities.date = convertTimeStringDate(subJson["start_date"].string!)
+            newActivities.date = subJson["start_date"].string!
             newActivities.name = subJson["name"].string
+            count += 1
+            }
+          
+        }
+        do{
+            try self.managedObjectContext.save()
+            reloadDataDelegate?.reloadData((0,count), json: nil)
+        } catch {
             
         }
         
+        
+  
+        
+    }
+    
+    func getMaxIdActivities()->Int{
+      
+        let predicate = NSPredicate(format: "idUser = %i", NSUserDefaults.standardUserDefaults().integerForKey("idUser"))
+        let sortDescr = NSSortDescriptor(key: "id", ascending: false)
+        let fetchRequest = NSFetchRequest(entityName: "Activities")
+         fetchRequest.predicate = predicate
+        fetchRequest.sortDescriptors = [sortDescr]
+        
+        var maxId:Int = 0
+        
         do{
-            try self.managedObjectContext.save()
-            self.reloadDataDelegate?.reloadData(2, json: jSon)
-        } catch{
-            
+            let fetchEntity = try self.managedObjectContext.executeFetchRequest(fetchRequest) as! [Activities]
+            if let first = fetchEntity.first {
+                maxId = first.id!.integerValue
+            }
+     
         }
+        catch{
+            print ("#5#")
+        }
+        return maxId
     }
     
     func convertTimeStringDate(string:String)->NSDate?{
@@ -104,7 +146,7 @@ class MBEDBInspector: UIViewController {
     func deleteActivities(){
         let predicate = NSPredicate(format: "idUser = %i", NSUserDefaults.standardUserDefaults().integerForKey("idUser"))
         
-        var fetchRequest = NSFetchRequest(entityName: "Activities")
+        let fetchRequest = NSFetchRequest(entityName: "Activities")
         fetchRequest.predicate = predicate
         do{
             let fetchEntity = try self.managedObjectContext.executeFetchRequest(fetchRequest) as! [Activities]
@@ -112,7 +154,7 @@ class MBEDBInspector: UIViewController {
                 self.managedObjectContext.deleteObject(entity)
             }
         } catch{
-            print ("error")
+            print ("#2#")
         }
         
         
@@ -128,31 +170,28 @@ class MBEDBInspector: UIViewController {
     }
     
     
-    func getSreamFromActivities(){
+    func getSreamFromActivities(Act:Activities){
         
-        
-        
-        let predicate = NSPredicate(format: "idUser = %i", NSUserDefaults.standardUserDefaults().integerForKey("idUser"))
-        let fetchRequest = NSFetchRequest(entityName: "Activities")
         let token = NSUserDefaults.standardUserDefaults().objectForKey("token")
         let headers = ["Authorization ": "Bearer \(token as! String)"]
-        
-        fetchRequest.predicate = predicate
-        do{
-            let fetchEntity = try self.managedObjectContext.executeFetchRequest(fetchRequest) as! [Activities]
-            for entity in fetchEntity {
-                print("https://www.strava.com/api/v3/activities/\(entity.id!)/streams/time")
+
+                print("https://www.strava.com/api/v3/activities/\(Act.id!)/streams/time")
                 
                 var streamTime = [Int]()
                 var streamDist = [Double]()
                 var count:Int = 0
                 var dist:Double = 0.0
                 
-                
+        let notTheMainQueue = dispatch_queue_create("com.vasili.orlov.besteffort", DISPATCH_QUEUE_SERIAL)
+        dispatch_async(notTheMainQueue) {
                 //get time
-                let  URLaloma = NSURL(string:"https://www.strava.com/api/v3/activities/\(entity.id!)/streams/time")
-                Alamofire.request(.GET, URLaloma! , headers: headers).responseJSON {
+                let  URLaloma = NSURL(string:"https://www.strava.com/api/v3/activities/\(Act.id!)/streams/time")
+                Alamofire.request(.GET, URLaloma! , headers: headers).responseJSON{
+                 
                     response in
+                   
+                    
+                    print("enter stream \(Act.id!)")
                     switch response.result {
                     case .Success:
                         if let value = response.result.value {
@@ -171,9 +210,11 @@ class MBEDBInspector: UIViewController {
                                 
                                 //  print(streamTime)
                             }
-                            
-                            
-                            for typDist in 0 ... 13 {
+  
+                            for typDist in 2 ... 12 {
+                                if typDist == 7 || typDist == 9 || typDist == 11 {
+                                continue
+                                }
                                 var minTime:Int = 0
                                 let  distLenth:Double = Double(self.getMetr(typDist))
                                 guard distLenth <= dist else {break}
@@ -185,15 +226,13 @@ class MBEDBInspector: UIViewController {
                                         let  distArray =   streamDist[index2 + 1] - streamDist[index]
                                         let  distArrayPre = streamDist[index2] - streamDist[index]
                                         let  timeArray = streamTime[index2+1] - streamTime[index]
-                                        let  timeArrayPre = streamTime[index2] - streamTime[index]
+                                       
                                         
                                         if distArrayPre < distLenth && distArray >= distLenth {
                                             if minTime == 0 || timeArray < minTime{
-                                                if distArray - distLenth > distLenth - distArrayPre{
-                                                    minTime = timeArray
-                                                } else {
-                                                    minTime = timeArrayPre
-                                                }
+                                                 let speed = distArray / Double(timeArray)
+                                                    minTime = Int( distLenth / speed)
+                                               
                                             }
                                             
                                             break
@@ -203,40 +242,40 @@ class MBEDBInspector: UIViewController {
                                     
                                 }
                                 
-                                
-                                
                                 let newEfforts = NSEntityDescription.insertNewObjectForEntityForName("Efforts", inManagedObjectContext: self.managedObjectContext) as! Efforts
                                 newEfforts.typeEfforts = self.getMetr(typDist)
                                 newEfforts.time = minTime
-                                newEfforts.activities = entity
+                                newEfforts.activities = Act
+                                
+                                print(newEfforts)
+                                
+                                
                                 do{
+                                    self.reloadDataDelegate?.reloadData((1,0), json: nil)
                                     try self.managedObjectContext.save()
                                 } catch{
                                     
                                 }
                                 
-                                print(entity.id!," ",distLenth," ",minTime," ",self.getTimeString(minTime))
                             }
-                            
-                            self.reloadDataDelegate?.reloadData(3, json: nil)
-                            
+                           print("exit stream \(Act.id!)")
+                           
                             
                         }
                     case .Failure(let error):
-                        print(error)
+                        print("#3#",error.code," ",error.localizedDescription)
+                    }
                     }
                 }
                 
-                self.reloadDataDelegate?.reloadData(4, json: nil)
-            }
+                
+        
+            print(" stream \(Act.id!)")
             
             
             
             
-            
-        } catch{
-            print ("error")
-        }
+      
         
         
         
@@ -309,16 +348,20 @@ class MBEDBInspector: UIViewController {
             let fetchEntity = try self.managedObjectContext.executeFetchRequest(fetchRequest) as! [Efforts]
             for entity in fetchEntity {
                 let resultNote = NoteEffort()
-                resultNote.date = ""
-                resultNote.name = ""
+                let activity = entity.activities as! Activities
+                
+                resultNote.date = activity.date!
+                resultNote.name = activity.name!
                 resultNote.time = getTimeString((entity.time?.integerValue)!)
                 resultNote.url = ""
                 
+                if  activity.idUser!.integerValue == NSUserDefaults.standardUserDefaults().integerForKey("idUser") {
                 result.append(resultNote)
+                }
             }
         }
         catch{
-            print ("error")
+            print ("#4#")
         }
         return result
     }
