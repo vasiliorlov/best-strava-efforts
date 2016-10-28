@@ -65,8 +65,10 @@ class MBEDBInspector: UIViewController {
                 if let value = response.result.value {
                     let jSon = JSON(value)
                     
-                    print(value.count)
+                    print("value.count = ",value.count)
                     if value.count != 0 {
+                        
+   // MARK: - !!!!!!!!! delete activities
                         self.deleteActivities()
                         self.saveActivitiesToDB(jSon)
                         self.requestWeb(url, page: page + 1)
@@ -82,17 +84,17 @@ class MBEDBInspector: UIViewController {
     func saveActivitiesToDB(jSon:JSON){
         var count = 0;
         let maxId = self.getMaxIdActivities()
-        print("max ID",maxId)
+
         let idUser =  NSUserDefaults.standardUserDefaults().integerForKey("idUser")
         for (_,subJson):(String, JSON) in jSon {
             
             
             if subJson["id"].int > maxId {
-            print("Insert id",subJson["id"].int)
+ 
             let newActivities = NSEntityDescription.insertNewObjectForEntityForName("Activities", inManagedObjectContext: self.managedObjectContext) as! Activities
             newActivities.id = subJson["id"].int
             newActivities.idUser = idUser
-            newActivities.date = subJson["start_date"].string!
+            newActivities.date = subJson["start_date_local"].string!
             newActivities.name = subJson["name"].string
             count += 1
             }
@@ -100,9 +102,11 @@ class MBEDBInspector: UIViewController {
         }
         do{
             try self.managedObjectContext.save()
-            reloadDataDelegate?.reloadData((0,count), json: nil)
+            if count != 0 {
+             reloadDataDelegate?.reloadData((0,count), json: nil)
+            }
         } catch {
-            
+            print("#10#")
         }
         
         
@@ -189,9 +193,6 @@ class MBEDBInspector: UIViewController {
                 Alamofire.request(.GET, URLaloma! , headers: headers).responseJSON{
                  
                     response in
-                   
-                    
-                    print("enter stream \(Act.id!)")
                     switch response.result {
                     case .Success:
                         if let value = response.result.value {
@@ -206,7 +207,6 @@ class MBEDBInspector: UIViewController {
                                     streamDist  =  subJson["data"].arrayObject as! [Double]
                                     dist = streamDist.last!
                                 }
-                                
                                 
                                 //  print(streamTime)
                             }
@@ -247,37 +247,29 @@ class MBEDBInspector: UIViewController {
                                 newEfforts.time = minTime
                                 newEfforts.activities = Act
                                 
-                                print(newEfforts)
-                                
                                 
                                 do{
-                                    self.reloadDataDelegate?.reloadData((1,0), json: nil)
+
                                     try self.managedObjectContext.save()
                                 } catch{
                                     
                                 }
                                 
                             }
-                           print("exit stream \(Act.id!)")
                            
                             
                         }
                     case .Failure(let error):
                         print("#3#",error.code," ",error.localizedDescription)
                     }
+                    
+                    //counter
+                    self.reloadDataDelegate?.reloadData((1,0), json: nil)
                     }
                 }
                 
                 
-        
-            print(" stream \(Act.id!)")
-            
-            
-            
-            
-      
-        
-        
+
         
         
     }

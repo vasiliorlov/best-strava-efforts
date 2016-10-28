@@ -14,6 +14,8 @@ class MBETableViewCell: UITableViewCell {
     @IBOutlet var labelTime: UILabel!
     @IBOutlet var labelDate: UILabel!
     @IBOutlet var labelName: UILabel!
+   
+    @IBOutlet var imagePlace: UIImageView!
     
     
     override func awakeFromNib() {

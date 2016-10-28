@@ -11,6 +11,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import KCFloatingActionButton
+import GTAlertBar
 
 public extension UIView {
     
@@ -115,9 +116,9 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
     
     
     func reloadData(step:(Int,Int), json:JSON?){
-        if step.0 == 0 {
+        if step.0 == 0 &&  step.1 == 0{
          //step 0 get activities
-            print("Load Activities")
+
              countAllActivities = (0,0)
             MBEDBInspector.sharedInstance.reloadDataDelegate = self
             MBEDBInspector.sharedInstance.requestWeb("https://www.strava.com/api/v3/athlete/activities",page: 1)
@@ -129,6 +130,7 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
             } else{
                 countAllActivities.0 += 1
               print("Match \(countAllActivities.0) / \(countAllActivities)")
+              viewAlert("Match Activities", body: "Match \(countAllActivities.0) / \(countAllActivities)")
             }
         }
        
@@ -144,9 +146,21 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("MBETableViewCell",forIndexPath: indexPath) as! MBETableViewCell
         cell.labelPlace.text = String(indexPath.row + 1)
-        cell.labelDate.text = result[indexPath.row].date
+        cell.labelDate.text =  getGmtTime(result[indexPath.row].date)
         cell.labelTime.text = result[indexPath.row].time
         cell.labelName.text = result[indexPath.row].name
+        switch indexPath.row {
+        case 0:
+            cell.imagePlace.image = UIImage(named: "1place")
+        case 1:
+            cell.imagePlace.image = UIImage(named: "2place")
+        case 2:
+            cell.imagePlace.image = UIImage(named: "3place")
+        default:
+             cell.imagePlace.image = nil
+        }
+        
+       
         
         return cell
     }
@@ -155,10 +169,35 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath){
         
     }
-
+    //view alert
+    func viewAlert(title:String,body:String){
+        let options = GTAlertBarOptions()
+        options.image = UIImage(named: "plan")
+        options.animation.fade = true
+        GTAlertBar.barAttachedToView(self,
+                                     title: title,
+                                     body:body,
+                                     options: options)
+        
+    }
     
+    
+    //set normal format
+    func getGmtTime(time:String) -> String{
+        let formater = NSDateFormatter()
+        formater.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
+         let dateAction = formater.dateFromString(time)
+        
+        let formaterCell = NSDateFormatter()
+         formaterCell.dateFormat = "yyyy'-'MM'-'dd' 'HH':'mm':'ss"
+        
+        return formaterCell.stringFromDate(dateAction!)
+       
+    }
     
     @IBAction func actionRefresh(sender: AnyObject) {
+        print("Load Activities")
+       // viewAlert("Load Activities", body: "DownLoad all list activities")
         reloadData((0,0), json: nil)
     }
     
