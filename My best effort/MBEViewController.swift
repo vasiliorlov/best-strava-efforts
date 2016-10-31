@@ -151,11 +151,11 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
         cell.labelName.text = result[indexPath.row].name
         switch indexPath.row {
         case 0:
-            cell.imagePlace.image = UIImage(named: "1place")
+            cell.imagePlace.image = UIImage(named: "1place_")
         case 1:
-            cell.imagePlace.image = UIImage(named: "2place")
+            cell.imagePlace.image = UIImage(named: "2place_")
         case 2:
-            cell.imagePlace.image = UIImage(named: "3place")
+            cell.imagePlace.image = UIImage(named: "3place_")
         default:
              cell.imagePlace.image = nil
         }
@@ -166,7 +166,10 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
     }
     
 
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath){
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+        
+           UIApplication.sharedApplication().openURL(NSURL(string: result[indexPath.row].url)!)
+        
         
     }
     //view alert
@@ -204,7 +207,8 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
     @IBAction func actionLogOut(sender: AnyObject) {
         NSUserDefaults.standardUserDefaults().removeObjectForKey("token")
         NSUserDefaults.standardUserDefaults().synchronize()
-        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("MBEStartViewController") as! MBEStartViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

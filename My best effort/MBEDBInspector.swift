@@ -345,7 +345,7 @@ class MBEDBInspector: UIViewController {
                 resultNote.date = activity.date!
                 resultNote.name = activity.name!
                 resultNote.time = getTimeString((entity.time?.integerValue)!)
-                resultNote.url = ""
+                resultNote.url = "https://www.strava.com/activities/" + String(activity.id!)
                 
                 if  activity.idUser!.integerValue == NSUserDefaults.standardUserDefaults().integerForKey("idUser") {
                 result.append(resultNote)
