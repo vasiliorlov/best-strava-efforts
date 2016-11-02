@@ -49,6 +49,7 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
     //label
     @IBOutlet var labelDist: UILabel!
     
+    @IBOutlet var buttonDownload: UIButton!
     var token:String?
     var result = [NoteEffort]()
     
@@ -90,7 +91,7 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
     }
     
     func gradView(){
-        let color1 = UIColor(red: 240/255, green: 120/255, blue: 35/255, alpha: 1).CGColor
+        let color1 = UIColor(red: 248/255, green: 76/255, blue: 28/255, alpha: 1).CGColor
         let color2 = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1).CGColor
         let gradLayer = CAGradientLayer()
         gradLayer.frame = self.view.bounds
@@ -99,6 +100,7 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
         gradLayer.colors = [color1,color2]
         
         self.view.layer.insertSublayer(gradLayer, atIndex: 0)
+   
         
      
         
@@ -116,6 +118,22 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
     
     
     func reloadData(step:(Int,Int), json:JSON?){
+        if step.0 == -4 {
+            viewAlert("Loaded", body: "Record Not Found",image: GTAlertBarImage.caution)
+            buttonDownload.enabled = true
+            return
+        }
+        if step.0 == -3 {
+            viewAlert("Error", body: "Server could not be found. Try for 15 min",image: GTAlertBarImage.exclamation)
+            buttonDownload.enabled = true
+            return
+        }
+        if step.0 < 0 {
+             viewAlert("Error", body: "Rate Limit Exceeded. Try for 15 min",image: GTAlertBarImage.exclamation)
+            buttonDownload.enabled = true
+            return
+        }
+        
         if step.0 == 0 &&  step.1 == 0{
          //step 0 get activities
 
@@ -127,10 +145,17 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
             if  step.0 == 0 &&  step.1 != 0 {
                 print("Loaded \(step.1) activities")
                 countAllActivities.1 = step.1
+                buttonDownload.enabled = false
             } else{
                 countAllActivities.0 += 1
-              print("Match \(countAllActivities.0) / \(countAllActivities)")
-              viewAlert("Match Activities", body: "Match \(countAllActivities.0) / \(countAllActivities)")
+              print("Match \(countAllActivities.0) / \(countAllActivities.1)")
+              viewAlert("Match Activities", body: "Match \(countAllActivities.0) / \(countAllActivities.1)", image: nil)
+                if countAllActivities.0  == countAllActivities.1 {
+                    result = MBEDBInspector.sharedInstance.getEfforts(typeDist.km1)
+                    tableView.reloadData()
+                    buttonDownload.enabled = true
+                }
+                
             }
         }
        
@@ -173,9 +198,15 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
         
     }
     //view alert
-    func viewAlert(title:String,body:String){
+    func viewAlert(title:String,body:String,image:UIImage?){
         let options = GTAlertBarOptions()
-        options.image = UIImage(named: "plan")
+    
+        if image == nil {
+         options.image = UIImage(named: "plan")
+        } else {
+            options.image = image
+            options.colors.background = UIColor.redColor()
+        }
         options.animation.fade = true
         GTAlertBar.barAttachedToView(self,
                                      title: title,

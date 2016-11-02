@@ -64,18 +64,24 @@ class MBEDBInspector: UIViewController {
             case .Success:
                 if let value = response.result.value {
                     let jSon = JSON(value)
+                 
+
+                    if jSon["message"] == "Rate Limit Exceeded"{
+                        self.reloadDataDelegate?.reloadData((-2,0), json: nil)
+                        break
+                    }
                     
-                    print("value.count = ",value.count)
                     if value.count != 0 {
                         
    // MARK: - !!!!!!!!! delete activities
-                        self.deleteActivities()
+                       // self.deleteActivities()
                         self.saveActivitiesToDB(jSon)
                         self.requestWeb(url, page: page + 1)
                     }
                 }
             case .Failure(let error):
                 print("#1#",error.code," ",error.localizedDescription)
+              self.reloadDataDelegate?.reloadData((-3,0), json: nil)
             }
         }
         }
@@ -102,8 +108,11 @@ class MBEDBInspector: UIViewController {
         }
         do{
             try self.managedObjectContext.save()
+            
             if count != 0 {
              reloadDataDelegate?.reloadData((0,count), json: nil)
+            } else {
+              self.reloadDataDelegate?.reloadData((-4,0), json: nil)  
             }
         } catch {
             print("#10#")
@@ -197,7 +206,14 @@ class MBEDBInspector: UIViewController {
                     case .Success:
                         if let value = response.result.value {
                             let jSon = JSON(value)
+          
                             for (_,subJson):(String, JSON) in jSon {
+                                                  print(subJson["field"],"#1# ",subJson," #2# ",jSon)
+
+                                guard subJson["original_size"].int != nil  else {
+                                    self.reloadDataDelegate?.reloadData((-4,0), json: nil)
+                                    break
+                                }
                                 
                                 count = subJson["original_size"].int!
                                 
