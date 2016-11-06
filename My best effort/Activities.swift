@@ -44,9 +44,12 @@ class Activities: NSManagedObject {
         
         if keyPath == "id" {
             // you can makes additional check if the value has changed ...
-            if let newValue = change?[NSKeyValueChangeNewKey] as? Int {
+            if (change?[NSKeyValueChangeNewKey] as? Int) != nil {
                 // TODO implementation
-                 MBEDBInspector.sharedInstance.getSreamFromActivities(self)
+               // let notTheMainQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+                 //   dispatch_queue_create("com.vasili.orlov.besteffort", DISPATCH_QUEUE_SERIAL)
+                                MBEDBInspector.sharedInstance.getSreamFromActivities(self)
+                
             }
             
         }

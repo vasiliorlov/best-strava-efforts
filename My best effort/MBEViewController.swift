@@ -55,13 +55,17 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
     
     var countAllActivities = (0,0)
     
+    @IBOutlet var loadIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //hidden indicator
+        loadIndicator.hidden = true
         //view gradient
         gradView()
         //hide baritem
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+
         
         fabRight.buttonImage = UIImage(named: "map2")
 
@@ -119,7 +123,7 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
     
     func reloadData(step:(Int,Int), json:JSON?){
         if step.0 == -4 {
-            viewAlert("Loaded", body: "Record Not Found",image: GTAlertBarImage.caution)
+            viewAlert("Loaded", body: "New record Not Found",image: GTAlertBarImage.caution)
             buttonDownload.enabled = true
             return
         }
@@ -134,30 +138,42 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
             return
         }
         
+        
         if step.0 == 0 &&  step.1 == 0{
-         //step 0 get activities
-
-             countAllActivities = (0,0)
+            //step 0 get activities
+            
+            countAllActivities = (0,0)
             MBEDBInspector.sharedInstance.reloadDataDelegate = self
             MBEDBInspector.sharedInstance.requestWeb("https://www.strava.com/api/v3/athlete/activities",page: 1)
-           
-        } else{
-            if  step.0 == 0 &&  step.1 != 0 {
-                print("Loaded \(step.1) activities")
-                countAllActivities.1 = step.1
-                buttonDownload.enabled = false
-            } else{
-                countAllActivities.0 += 1
-              print("Match \(countAllActivities.0) / \(countAllActivities.1)")
-              viewAlert("Match Activities", body: "Match \(countAllActivities.0) / \(countAllActivities.1)", image: nil)
-                if countAllActivities.0  == countAllActivities.1 {
-                    result = MBEDBInspector.sharedInstance.getEfforts(typeDist.km1)
-                    tableView.reloadData()
-                    buttonDownload.enabled = true
-                }
-                
+            viewAlert("Request activities", body: "Request activities", image: nil)
+            
+        }
+        
+        
+        if  step.0 == 0 &&  step.1 != 0 {
+            countAllActivities.1 = step.1
+            buttonDownload.enabled = false
+            viewAlert("Loaded activities", body: "Loaded \(step.1) activities", image: nil)
+            viewAlert("Find effort", body: "Find the best effort", image: nil)
+            loadIndicator.hidden = false
+            loadIndicator.startAnimating()
+          
+        }
+        if step.0 == 1 {
+            countAllActivities.0 += 1
+
+            if countAllActivities.0  == countAllActivities.1 {
+                viewAlert("Finish", body: "Finish", image: nil)
+                result = MBEDBInspector.sharedInstance.getEfforts(typeDist.km1)
+                tableView.reloadData()
+                buttonDownload.enabled = true
+                loadIndicator.hidden = true
+                loadIndicator.stopAnimating()
             }
         }
+        
+
+        
        
         
         
@@ -199,6 +215,8 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
     }
     //view alert
     func viewAlert(title:String,body:String,image:UIImage?){
+       
+      
         let options = GTAlertBarOptions()
     
         if image == nil {
@@ -208,10 +226,12 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
             options.colors.background = UIColor.redColor()
         }
         options.animation.fade = true
+
         GTAlertBar.barAttachedToView(self,
                                      title: title,
                                      body:body,
                                      options: options)
+        
         
     }
     
@@ -230,8 +250,7 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
     }
     
     @IBAction func actionRefresh(sender: AnyObject) {
-        print("Load Activities")
-       // viewAlert("Load Activities", body: "DownLoad all list activities")
+
         reloadData((0,0), json: nil)
     }
     

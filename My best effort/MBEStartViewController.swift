@@ -22,13 +22,12 @@ class MBEStartViewController: UIViewController {
         
         
         
-         print("start",NSUserDefaults.standardUserDefaults().objectForKey("token"))
        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MBEStartViewController.goNextController(_:)), name:"MBEStravaNotificationIdentifier", object: nil)
         
         if let token = NSUserDefaults.standardUserDefaults().objectForKey("token") {
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("MBEViewController") as! MBEViewController
             vc.token = token as? String
-            print("Enter")
+
             self.navigationController?.pushViewController(vc, animated: true)
         }
         

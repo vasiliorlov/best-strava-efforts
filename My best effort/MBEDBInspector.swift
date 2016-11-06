@@ -56,8 +56,7 @@ class MBEDBInspector: UIViewController {
         let headers = ["Authorization ": "Bearer \(token as! String)"]
         let params = ["page":page,"per_page":200]
         let URLaloma = NSURL(string:url)
-        let notTheMainQueue = dispatch_queue_create("com.vasili.orlov.besteffort", DISPATCH_QUEUE_SERIAL)
-        dispatch_async(notTheMainQueue) {
+     
         Alamofire.request(.GET, URLaloma! ,parameters: params, headers: headers).responseJSON {
             response in
             switch response.result {
@@ -74,7 +73,7 @@ class MBEDBInspector: UIViewController {
                     if value.count != 0 {
                         
    // MARK: - !!!!!!!!! delete activities
-                       // self.deleteActivities()
+                      //  self.deleteActivities()
                         self.saveActivitiesToDB(jSon)
                         self.requestWeb(url, page: page + 1)
                     }
@@ -83,7 +82,7 @@ class MBEDBInspector: UIViewController {
                 print("#1#",error.code," ",error.localizedDescription)
               self.reloadDataDelegate?.reloadData((-3,0), json: nil)
             }
-        }
+        
         }
     }
     
@@ -102,6 +101,7 @@ class MBEDBInspector: UIViewController {
             newActivities.idUser = idUser
             newActivities.date = subJson["start_date_local"].string!
             newActivities.name = subJson["name"].string
+            
             count += 1
             }
           
@@ -184,19 +184,16 @@ class MBEDBInspector: UIViewController {
     
     
     func getSreamFromActivities(Act:Activities){
-        
+
         let token = NSUserDefaults.standardUserDefaults().objectForKey("token")
         let headers = ["Authorization ": "Bearer \(token as! String)"]
 
-                print("https://www.strava.com/api/v3/activities/\(Act.id!)/streams/time")
                 
                 var streamTime = [Int]()
                 var streamDist = [Double]()
                 var count:Int = 0
                 var dist:Double = 0.0
-                
-        let notTheMainQueue = dispatch_queue_create("com.vasili.orlov.besteffort", DISPATCH_QUEUE_SERIAL)
-        dispatch_async(notTheMainQueue) {
+   
                 //get time
                 let  URLaloma = NSURL(string:"https://www.strava.com/api/v3/activities/\(Act.id!)/streams/time")
                 Alamofire.request(.GET, URLaloma! , headers: headers).responseJSON{
@@ -206,10 +203,8 @@ class MBEDBInspector: UIViewController {
                     case .Success:
                         if let value = response.result.value {
                             let jSon = JSON(value)
-          
                             for (_,subJson):(String, JSON) in jSon {
-                                                  print(subJson["field"],"#1# ",subJson," #2# ",jSon)
-
+     
                                 guard subJson["original_size"].int != nil  else {
                                     self.reloadDataDelegate?.reloadData((-4,0), json: nil)
                                     break
@@ -235,9 +230,13 @@ class MBEDBInspector: UIViewController {
                                 let  distLenth:Double = Double(self.getMetr(typDist))
                                 guard distLenth <= dist else {break}
                                 for index in 0 ... count-2 {
+                                  // print(streamDist[index]," ",distLenth," ",dist)
+                                    if streamDist[index] + distLenth > dist { //если текущая позиция + иследуемая дистанция больше максимальной длинный в стреме нет надобности искать дальше
+                                        
+                                        break
+                                    }
                                     
                                     for index2 in index ... count-2 {
-                                        
                                         
                                         let  distArray =   streamDist[index2 + 1] - streamDist[index]
                                         let  distArrayPre = streamDist[index2] - streamDist[index]
@@ -262,7 +261,7 @@ class MBEDBInspector: UIViewController {
                                 newEfforts.typeEfforts = self.getMetr(typDist)
                                 newEfforts.time = minTime
                                 newEfforts.activities = Act
-                                
+
                                 
                                 do{
 
@@ -280,13 +279,11 @@ class MBEDBInspector: UIViewController {
                     }
                     
                     //counter
-                    self.reloadDataDelegate?.reloadData((1,0), json: nil)
-                    }
-                }
-                
-                
 
-        
+                     self.reloadDataDelegate?.reloadData((1,0), json: nil)
+
+                    
+                    }
         
     }
     
