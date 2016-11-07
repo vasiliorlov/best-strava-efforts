@@ -55,6 +55,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="cck-6t-vqp"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="logoConnect" destination="mw4-jq-xr9" id="vbe-oj-XwQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -94,10 +97,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SE6-hO-d8S">
-                                <rect key="frame" x="19" y="20" width="73" height="30"/>
+                                <rect key="frame" x="19" y="20" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="SfH-MK-lQm"/>
-                                    <constraint firstAttribute="width" constant="73" id="TS8-M6-RT0"/>
+                                    <constraint firstAttribute="width" constant="100" id="TS8-M6-RT0"/>
                                 </constraints>
                                 <state key="normal" title="DownLoad"/>
                                 <connections>
@@ -186,8 +189,8 @@
                                     <outlet property="delegate" destination="8mw-vn-fNz" id="rpr-OO-mR9"/>
                                 </connections>
                             </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Mdd-Ra-dRg">
-                                <rect key="frame" x="100" y="20" width="37" height="37"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Mdd-Ra-dRg">
+                                <rect key="frame" x="127" y="20" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <constraints>

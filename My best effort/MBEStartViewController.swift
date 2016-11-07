@@ -11,10 +11,16 @@ import UIKit
 class MBEStartViewController: UIViewController {
 
     
+    @IBOutlet var logoConnect: UIButton!
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        if NSUserDefaults.standardUserDefaults().objectForKey("token") != nil {
+            logoConnect.enabled = false
+        }
 
     }
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +31,7 @@ class MBEStartViewController: UIViewController {
        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MBEStartViewController.goNextController(_:)), name:"MBEStravaNotificationIdentifier", object: nil)
         
         if let token = NSUserDefaults.standardUserDefaults().objectForKey("token") {
+         
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("MBEViewController") as! MBEViewController
             vc.token = token as? String
 

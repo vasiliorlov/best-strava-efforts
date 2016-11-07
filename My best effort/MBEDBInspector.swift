@@ -56,15 +56,15 @@ class MBEDBInspector: UIViewController {
         let headers = ["Authorization ": "Bearer \(token as! String)"]
         let params = ["page":page,"per_page":200]
         let URLaloma = NSURL(string:url)
-     
+        
         Alamofire.request(.GET, URLaloma! ,parameters: params, headers: headers).responseJSON {
             response in
             switch response.result {
             case .Success:
                 if let value = response.result.value {
                     let jSon = JSON(value)
-                 
-
+                    
+                    
                     if jSon["message"] == "Rate Limit Exceeded"{
                         self.reloadDataDelegate?.reloadData((-2,0), json: nil)
                         break
@@ -72,7 +72,7 @@ class MBEDBInspector: UIViewController {
                     
                     if value.count != 0 {
                         
-   // MARK: - !!!!!!!!! delete activities
+                        // MARK: - !!!!!!!!! delete activities
                       //  self.deleteActivities()
                         self.saveActivitiesToDB(jSon)
                         self.requestWeb(url, page: page + 1)
@@ -80,55 +80,55 @@ class MBEDBInspector: UIViewController {
                 }
             case .Failure(let error):
                 print("#1#",error.code," ",error.localizedDescription)
-              self.reloadDataDelegate?.reloadData((-3,0), json: nil)
+                self.reloadDataDelegate?.reloadData((-3,0), json: nil)
             }
-        
+            
         }
     }
     
     func saveActivitiesToDB(jSon:JSON){
         var count = 0;
         let maxId = self.getMaxIdActivities()
-
+        
         let idUser =  NSUserDefaults.standardUserDefaults().integerForKey("idUser")
         for (_,subJson):(String, JSON) in jSon {
             
             
             if subJson["id"].int > maxId {
- 
-            let newActivities = NSEntityDescription.insertNewObjectForEntityForName("Activities", inManagedObjectContext: self.managedObjectContext) as! Activities
-            newActivities.id = subJson["id"].int
-            newActivities.idUser = idUser
-            newActivities.date = subJson["start_date_local"].string!
-            newActivities.name = subJson["name"].string
-            
-            count += 1
+                
+                let newActivities = NSEntityDescription.insertNewObjectForEntityForName("Activities", inManagedObjectContext: self.managedObjectContext) as! Activities
+                newActivities.id = subJson["id"].int
+                newActivities.idUser = idUser
+                newActivities.date = subJson["start_date_local"].string!
+                newActivities.name = subJson["name"].string
+                
+                count += 1
             }
-          
+            
         }
         do{
             try self.managedObjectContext.save()
             
             if count != 0 {
-             reloadDataDelegate?.reloadData((0,count), json: nil)
+                reloadDataDelegate?.reloadData((0,count), json: nil)
             } else {
-              self.reloadDataDelegate?.reloadData((-4,0), json: nil)  
+                self.reloadDataDelegate?.reloadData((-4,0), json: nil)
             }
         } catch {
             print("#10#")
         }
         
         
-  
+        
         
     }
     
     func getMaxIdActivities()->Int{
-      
+        
         let predicate = NSPredicate(format: "idUser = %i", NSUserDefaults.standardUserDefaults().integerForKey("idUser"))
         let sortDescr = NSSortDescriptor(key: "id", ascending: false)
         let fetchRequest = NSFetchRequest(entityName: "Activities")
-         fetchRequest.predicate = predicate
+        fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = [sortDescr]
         
         var maxId:Int = 0
@@ -138,7 +138,7 @@ class MBEDBInspector: UIViewController {
             if let first = fetchEntity.first {
                 maxId = first.id!.integerValue
             }
-     
+            
         }
         catch{
             print ("#5#")
@@ -154,6 +154,21 @@ class MBEDBInspector: UIViewController {
         dateFormatter.timeZone = NSTimeZone(name: "UTC")
         let date = dateFormatter.dateFromString(string)
         return date
+    }
+    
+    func getAllCount()->Int{
+        var count = 0
+        let predicate = NSPredicate(format: "idUser = %i", NSUserDefaults.standardUserDefaults().integerForKey("idUser"))
+        
+        let fetchRequest = NSFetchRequest(entityName: "Activities")
+        fetchRequest.predicate = predicate
+        do{
+            let fetchEntity = try self.managedObjectContext.executeFetchRequest(fetchRequest) as! [Activities]
+            count = fetchEntity.count
+        } catch{
+            print ("#2#")
+        }
+        return count
     }
     
     func deleteActivities(){
@@ -184,106 +199,110 @@ class MBEDBInspector: UIViewController {
     
     
     func getSreamFromActivities(Act:Activities){
-
         let token = NSUserDefaults.standardUserDefaults().objectForKey("token")
         let headers = ["Authorization ": "Bearer \(token as! String)"]
-
-                
-                var streamTime = [Int]()
-                var streamDist = [Double]()
-                var count:Int = 0
-                var dist:Double = 0.0
-   
-                //get time
-                let  URLaloma = NSURL(string:"https://www.strava.com/api/v3/activities/\(Act.id!)/streams/time")
-                Alamofire.request(.GET, URLaloma! , headers: headers).responseJSON{
-                 
-                    response in
-                    switch response.result {
-                    case .Success:
-                        if let value = response.result.value {
-                            let jSon = JSON(value)
-                            for (_,subJson):(String, JSON) in jSon {
-     
-                                guard subJson["original_size"].int != nil  else {
-                                    self.reloadDataDelegate?.reloadData((-4,0), json: nil)
+        
+        var streamTime = [Int]()
+        var streamDist = [Double]()
+        var count:Int = 0
+        var dist:Double = 0.0
+        
+        //get time
+        let  URLaloma = NSURL(string:"https://www.strava.com/api/v3/activities/\(Act.id!)/streams/time")
+        Alamofire.request(.GET, URLaloma! , headers: headers).responseJSON{
+            
+            response in
+            switch response.result {
+            case .Success:
+                let notTheMainQueue =   dispatch_queue_create("com.vasili.orlov.besteffort", DISPATCH_QUEUE_SERIAL)
+                dispatch_async(notTheMainQueue,{
+                    
+                    if let value = response.result.value {
+                        
+                        let jSon = JSON(value)
+                        for (_,subJson):(String, JSON) in jSon {
+                            guard subJson["original_size"].int != nil  else {
+                                self.reloadDataDelegate?.reloadData((-4,0), json: nil)
+                                break
+                            }
+                            
+                            count = subJson["original_size"].int!
+                            
+                            if subJson["type"] == "time" {
+                                streamTime  =  subJson["data"].arrayObject as! [Int]
+                            } else if   subJson["type"] == "distance" {
+                                streamDist  =  subJson["data"].arrayObject as! [Double]
+                                dist = streamDist.last!
+                            }
+                            
+                            //  print(streamTime)
+                        }
+                        for typDist in 2 ... 12 {
+                            if typDist == 7 || typDist == 9 || typDist == 11 {
+                                continue
+                            }
+                            var minTime:Int = 0
+                            let  distLenth:Double = Double(self.getMetr(typDist))
+                            guard distLenth <= dist else {break}
+                            for index in 0 ... count-2 {
+                                // print(streamDist[index]," ",distLenth," ",dist)
+                                if streamDist[index] + distLenth > dist { //если текущая позиция + иследуемая дистанция больше максимальной длинный в стреме нет надобности искать дальше
+                                    
                                     break
                                 }
                                 
-                                count = subJson["original_size"].int!
-                                
-                                if subJson["type"] == "time" {
-                                    streamTime  =  subJson["data"].arrayObject as! [Int]
-                                } else if   subJson["type"] == "distance" {
-                                    streamDist  =  subJson["data"].arrayObject as! [Double]
-                                    dist = streamDist.last!
-                                }
-                                
-                                //  print(streamTime)
-                            }
-  
-                            for typDist in 2 ... 12 {
-                                if typDist == 7 || typDist == 9 || typDist == 11 {
-                                continue
-                                }
-                                var minTime:Int = 0
-                                let  distLenth:Double = Double(self.getMetr(typDist))
-                                guard distLenth <= dist else {break}
-                                for index in 0 ... count-2 {
-                                  // print(streamDist[index]," ",distLenth," ",dist)
-                                    if streamDist[index] + distLenth > dist { //если текущая позиция + иследуемая дистанция больше максимальной длинный в стреме нет надобности искать дальше
+                                for index2 in index ... count-2 {
+                                    
+                                    let  distArray =   streamDist[index2 + 1] - streamDist[index]
+                                    let  distArrayPre = streamDist[index2] - streamDist[index]
+                                    let  timeArray = streamTime[index2+1] - streamTime[index]
+                                    
+                                    
+                                    if distArrayPre < distLenth && distArray >= distLenth {
+                                        if minTime == 0 || timeArray < minTime{
+                                            let speed = distArray / Double(timeArray)
+                                            minTime = Int( distLenth / speed)
+                                            
+                                        }
                                         
                                         break
                                     }
                                     
-                                    for index2 in index ... count-2 {
-                                        
-                                        let  distArray =   streamDist[index2 + 1] - streamDist[index]
-                                        let  distArrayPre = streamDist[index2] - streamDist[index]
-                                        let  timeArray = streamTime[index2+1] - streamTime[index]
-                                       
-                                        
-                                        if distArrayPre < distLenth && distArray >= distLenth {
-                                            if minTime == 0 || timeArray < minTime{
-                                                 let speed = distArray / Double(timeArray)
-                                                    minTime = Int( distLenth / speed)
-                                               
-                                            }
-                                            
-                                            break
-                                        }
-                                        
-                                    }
-                                    
-                                }
-                                
-                                let newEfforts = NSEntityDescription.insertNewObjectForEntityForName("Efforts", inManagedObjectContext: self.managedObjectContext) as! Efforts
-                                newEfforts.typeEfforts = self.getMetr(typDist)
-                                newEfforts.time = minTime
-                                newEfforts.activities = Act
-
-                                
-                                do{
-
-                                    try self.managedObjectContext.save()
-                                } catch{
-                                    
                                 }
                                 
                             }
-                           
                             
+                            let newEfforts = NSEntityDescription.insertNewObjectForEntityForName("Efforts", inManagedObjectContext: self.managedObjectContext) as! Efforts
+                            newEfforts.typeEfforts = self.getMetr(typDist)
+                            newEfforts.time = minTime
+                            newEfforts.activities = Act
+                            
+                            dispatch_async(dispatch_get_main_queue(),{
+                                do{
+                                    try self.managedObjectContext.save()
+                                    
+                                } catch{
+                                    
+                                }
+                            })
                         }
-                    case .Failure(let error):
-                        print("#3#",error.code," ",error.localizedDescription)
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.reloadDataDelegate?.reloadData((1,0), json: nil)
+                            
+                        })
+                        
+                        
                     }
-                    
-                    //counter
-
-                     self.reloadDataDelegate?.reloadData((1,0), json: nil)
-
-                    
-                    }
+                })
+            case .Failure(let error):
+                print("#3#",error.code," ",error.localizedDescription)
+            }
+            
+            
+            
+            
+            
+        }
         
     }
     
@@ -361,7 +380,7 @@ class MBEDBInspector: UIViewController {
                 resultNote.url = "https://www.strava.com/activities/" + String(activity.id!)
                 
                 if  activity.idUser!.integerValue == NSUserDefaults.standardUserDefaults().integerForKey("idUser") {
-                result.append(resultNote)
+                    result.append(resultNote)
                 }
             }
         }

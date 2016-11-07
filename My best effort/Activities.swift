@@ -46,10 +46,10 @@ class Activities: NSManagedObject {
             // you can makes additional check if the value has changed ...
             if (change?[NSKeyValueChangeNewKey] as? Int) != nil {
                 // TODO implementation
-               // let notTheMainQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-                 //   dispatch_queue_create("com.vasili.orlov.besteffort", DISPATCH_QUEUE_SERIAL)
-                                MBEDBInspector.sharedInstance.getSreamFromActivities(self)
-                
+              //  let notTheMainQueue =   dispatch_queue_create("com.vasili.orlov.besteffort", DISPATCH_QUEUE_SERIAL)
+            //    dispatch_async(notTheMainQueue, {
+                MBEDBInspector.sharedInstance.getSreamFromActivities(self)
+            //    })
             }
             
         }

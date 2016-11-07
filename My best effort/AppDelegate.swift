@@ -73,7 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         let athlete = json["athlete"]
                         NSUserDefaults.standardUserDefaults().setInteger(athlete["id"].int!, forKey: "idUser")
                         NSNotificationCenter.defaultCenter().postNotificationName("MBEStravaNotificationIdentifier", object: nil)
-                        print("set")
                         
                     }
                 case .Failure(let error):
@@ -86,8 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
-        print("app",NSUserDefaults.standardUserDefaults().objectForKey("token"))
-        
+       
                 NSUserDefaults.standardUserDefaults().synchronize()
 
             

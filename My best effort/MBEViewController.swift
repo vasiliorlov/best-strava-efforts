@@ -57,6 +57,8 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
     
     @IBOutlet var loadIndicator: UIActivityIndicatorView!
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //hidden indicator
@@ -123,17 +125,17 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
     
     func reloadData(step:(Int,Int), json:JSON?){
         if step.0 == -4 {
-            viewAlert("Loaded", body: "New record Not Found",image: GTAlertBarImage.caution)
+            viewAlert("Loaded", body: "New record not found",image: GTAlertBarImage.caution)
             buttonDownload.enabled = true
             return
         }
         if step.0 == -3 {
-            viewAlert("Error", body: "Server could not be found. Try for 15 min",image: GTAlertBarImage.exclamation)
+            viewAlert("Error", body: "Server could not be found. Try later",image: GTAlertBarImage.exclamation)
             buttonDownload.enabled = true
             return
         }
         if step.0 < 0 {
-             viewAlert("Error", body: "Rate Limit Exceeded. Try for 15 min",image: GTAlertBarImage.exclamation)
+             viewAlert("Error", body: "Rate Limit Exceeded. Try later",image: GTAlertBarImage.exclamation)
             buttonDownload.enabled = true
             return
         }
@@ -162,6 +164,8 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
         if step.0 == 1 {
             countAllActivities.0 += 1
 
+            self.labelDist.text = String(self.countAllActivities.0) + " / " + String(self.countAllActivities.1 )
+            
             if countAllActivities.0  == countAllActivities.1 {
                 viewAlert("Finish", body: "Finish", image: nil)
                 result = MBEDBInspector.sharedInstance.getEfforts(typeDist.km1)
@@ -169,6 +173,7 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
                 buttonDownload.enabled = true
                 loadIndicator.hidden = true
                 loadIndicator.stopAnimating()
+                self.labelDist.text = "1 km"
             }
         }
         
@@ -178,6 +183,24 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
         
         
     }
+    /*
+    public func delay(bySeconds seconds: Double, dispatchLevel: DispatchLevel = .main, closure: @escaping () -> Void) {
+        let dispatchTime = DispatchTime.now() + Double(Int64(seconds * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        dispatchLevel.dispatchQueue.asyncAfter(deadline: dispatchTime, execute: closure)
+    }
+    
+    public enum DispatchLevel {
+        case main, userInteractive, userInitiated, utility, background
+        var dispatchQueue: DispatchQueue {
+            switch self {
+            case .main:                 return DispatchQueue.main
+            case .userInteractive:      return DispatchQueue.global(qos: .userInteractive)
+            case .userInitiated:        return DispatchQueue.global(qos: .userInitiated)
+            case .utility:              return DispatchQueue.global(qos: .utility)
+            case .background:           return DispatchQueue.global(qos: .background)
+            }
+        }
+    }*/
     //MARK: - table UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -186,7 +209,7 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("MBETableViewCell",forIndexPath: indexPath) as! MBETableViewCell
-        cell.labelPlace.text = String(indexPath.row + 1)
+          cell.labelPlace.text = String(indexPath.row + 1)
         cell.labelDate.text =  getGmtTime(result[indexPath.row].date)
         cell.labelTime.text = result[indexPath.row].time
         cell.labelName.text = result[indexPath.row].name
@@ -253,6 +276,7 @@ class MBEViewController: UIViewController, reLoadDataDataSource, UITableViewDele
 
         reloadData((0,0), json: nil)
     }
+    
     
     @IBAction func actionLogOut(sender: AnyObject) {
         NSUserDefaults.standardUserDefaults().removeObjectForKey("token")

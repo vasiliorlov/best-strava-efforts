@@ -14,6 +14,8 @@ class MBETableViewCell: UITableViewCell {
     @IBOutlet var labelTime: UILabel!
     @IBOutlet var labelDate: UILabel!
     @IBOutlet var labelName: UILabel!
+    
+    
    
     @IBOutlet var imagePlace: UIImageView!
     
@@ -23,7 +25,8 @@ class MBETableViewCell: UITableViewCell {
         let color1 = UIColor(red: 248/255, green: 76/255, blue: 28/255, alpha: 1).CGColor
         let color2 = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1).CGColor
         let gradLayer = CAGradientLayer()
-        gradLayer.frame = self.contentView.bounds
+        
+        gradLayer.frame =  CGRectMake(0, 0, (UIScreen.mainScreen().bounds.width >  self.contentView.bounds.width) ? UIScreen.mainScreen().bounds.width : self.contentView.bounds.width , self.frame.size.height );
         gradLayer.startPoint = CGPoint(x: 0, y: 0)
         gradLayer.endPoint = CGPoint(x: 1, y: 1)
         gradLayer.colors = [color1,color2]

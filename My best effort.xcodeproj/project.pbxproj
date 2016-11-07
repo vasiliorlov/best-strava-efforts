@@ -21,7 +21,6 @@
 		8844E36D1D906D8F00B60587 /* MBEStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8844E36C1D906D8F00B60587 /* MBEStartViewController.swift */; };
 		884BCB381DC1B82E009CC36D /* plan.png in Resources */ = {isa = PBXBuildFile; fileRef = 884BCB371DC1B82E009CC36D /* plan.png */; };
 		8850A6A51D9D8E8C00C15C3A /* MBETableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850A6A41D9D8E8C00C15C3A /* MBETableViewCell.swift */; };
-		8851B33C1D82732A0069A886 /* FRDStravaClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8851B33B1D82732A0069A886 /* FRDStravaClient.framework */; };
 		8853F3CC1DC7AD4000035F6D /* 1place_.png in Resources */ = {isa = PBXBuildFile; fileRef = 8853F3CB1DC7AD4000035F6D /* 1place_.png */; };
 		8853F3CE1DC7AD4900035F6D /* 2place_.png in Resources */ = {isa = PBXBuildFile; fileRef = 8853F3CD1DC7AD4900035F6D /* 2place_.png */; };
 		8853F3D01DC7AD5000035F6D /* 3place_.png in Resources */ = {isa = PBXBuildFile; fileRef = 8853F3CF1DC7AD5000035F6D /* 3place_.png */; };
@@ -66,7 +65,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8851B33C1D82732A0069A886 /* FRDStravaClient.framework in Frameworks */,
 				B9B37A4E5670479E4085288B /* Pods_My_best_effort.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,6 +431,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "My best effort/My best effort-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -449,6 +448,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.orlov.vasili.My-best-effort";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "My best effort/My best effort-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
